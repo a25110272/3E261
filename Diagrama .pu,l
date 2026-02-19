@@ -1,0 +1,97 @@
+class Juego
+class Ronda
+class Nivel
+class Tiempo
+class Escenario
+class Interfaz
+class Sonido
+class Musica
+
+class Personaje
+class Spiderman
+class Jugador
+class CPU
+class Equipo
+
+class Vida
+class Energia
+class Puntaje
+class BarraEspecial
+class Estado
+
+class Movimiento
+class MovimientoEspecial
+class SuperMovimiento
+class Combo
+class Golpe
+class Ataque
+class Defensa
+class Salto
+class Proyectil
+class Daño
+class Colision
+class Hitbox
+class Animacion
+class Poder
+
+class Victoria
+class Derrota
+
+class Control
+class Item
+
+
+Spiderman --|> Personaje
+Ryu --|> Personaje
+Ken --|> Personaje
+ChunLi --|> Personaje
+
+
+
+Jugador --|> Personaje
+CPU --|> Personaje
+
+MovimientoEspecial --|> Movimiento
+SuperMovimiento --|> Movimiento
+
+
+Juego *-- Ronda
+Juego *-- Tiempo
+Juego *-- Nivel
+Juego *-- Escenario
+Juego *-- Jugador
+Juego *-- Equipo
+Juego *-- Interfaz
+Juego *-- Sonido
+Juego *-- Musica
+
+Jugador *-- Control
+Equipo *-- Personaje
+
+Escenario *-- Item
+Escenario *-- Colision
+
+Personaje *-- Vida
+Personaje *-- Energia
+Personaje *-- Puntaje
+Personaje *-- BarraEspecial
+Personaje *-- Estado
+Personaje *-- Poder
+Personaje *-- Animacion
+Personaje *-- Hitbox
+Personaje *-- Movimiento
+Personaje *-- Combo
+Personaje *-- Ataque
+Personaje *-- Defensa
+Personaje *-- Salto
+Personaje *-- Item
+
+Ataque *-- Daño
+Ataque *-- Proyectil
+
+Movimiento *-- Golpe
+Movimiento *-- Colision
+
+Ronda *-- Victoria
+Ronda *-- Derrota
+
