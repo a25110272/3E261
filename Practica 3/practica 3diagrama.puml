@@ -9,8 +9,11 @@ class Musica
 
 class Personaje
 class Spiderman
+class Ryu
+class Ken
+class ChunLi
 class Jugador
-class CPU
+class Cpu
 class Equipo
 
 class Vida
@@ -28,7 +31,7 @@ class Ataque
 class Defensa
 class Salto
 class Proyectil
-class Daño
+class Dano
 class Colision
 class Hitbox
 class Animacion
@@ -40,31 +43,28 @@ class Derrota
 class Control
 class Item
 
-' --- herencias ---
 Spiderman --|> Personaje
 Ryu --|> Personaje
 Ken --|> Personaje
 ChunLi --|> Personaje
 
 Jugador --|> Personaje
-CPU --|> Personaje
+Cpu --|> Personaje
 
 MovimientoEspecial --|> Movimiento
 SuperMovimiento --|> Movimiento
 
-' --- asociaciones con multiplicidad ---
 Juego "1" *-- "1..*" Ronda
 Juego "1" *-- "1" Tiempo
 Juego "1" *-- "*" Nivel
 Juego "1" *-- "*" Escenario
-Juego "1" *-- "*" Jugador
-Juego "1" *-- "0..*" Equipo
+Juego "1" *-- "1..2" Jugador
 Juego "1" *-- "1" Interfaz
 Juego "1" *-- "1" Sonido
 Juego "1" *-- "0..*" Musica
 
-Jugador "1" *-- "1" Control
-Equipo "1" *-- "*" Personaje
+Jugador "1" *-- "1" Equipo
+Equipo "1" *-- "2..3" Personaje
 
 Escenario "1" *-- "0..*" Item
 Escenario "1" *-- "*" Colision
@@ -84,7 +84,7 @@ Personaje "1" *-- "0..*" Defensa
 Personaje "1" *-- "0..*" Salto
 Personaje "1" *-- "0..*" Item
 
-Ataque "1" *-- "1" Daño
+Ataque "1" *-- "1" Dano
 Ataque "1" *-- "0..1" Proyectil
 
 Movimiento "1" *-- "0..*" Golpe
