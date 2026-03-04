@@ -3,11 +3,12 @@ class Ronda
 class Nivel
 class Tiempo
 class Escenario
-class Interfaz
-class Sonido
-class Musica
 
-class Personaje
+
+class Personaje{
+- Vida porcentVida[0..100]
+
+}
 class Spiderman
 class Ryu
 class Ken
@@ -41,15 +42,21 @@ class Victoria
 class Derrota
 
 class Control
-class Item
+class Asistencias{
++ MovimientoEspecial: Golpear()
++ MovimientoEspecial: Cubrir()
 
+
+
+}
+Personaje "1" o-- "1..*" Asistencias
 Spiderman --|> Personaje
 Ryu --|> Personaje
 Ken --|> Personaje
 ChunLi --|> Personaje
 
 Jugador --|> Personaje
-Cpu --|> Personaje
+
 
 MovimientoEspecial --|> Movimiento
 SuperMovimiento --|> Movimiento
@@ -91,4 +98,4 @@ Movimiento "1" *-- "0..*" Golpe
 Movimiento "1" *-- "0..*" Colision
 
 Ronda "1" *-- "0..1" Victoria
-Ronda "1" *-- "0..1" Derrota
+Ronda "1" *-- "0..1" Derrotac
