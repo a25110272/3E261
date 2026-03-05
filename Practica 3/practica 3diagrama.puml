@@ -1,55 +1,185 @@
-class Juego
-class Ronda
-class Nivel
-class Tiempo
-class Escenario
-
-
-class Personaje{
-- Vida porcentVida[0..100]
-
+class Juego {
+- nombre
++Iniciar()
++Terminar()
 }
-class Spiderman
-class Ryu
-class Ken
-class ChunLi
-class Jugador
-class Cpu
-class Equipo
 
-class Vida
-class Energia
-class Puntaje
-class BarraEspecial
-class Estado
+class Ronda {
+- numero
++Iniciar()
++Terminar()
+}
 
-class Movimiento
-class MovimientoEspecial
-class SuperMovimiento
-class Combo
-class Golpe
-class Ataque
-class Defensa
-class Salto
-class Proyectil
-class Dano
-class Colision
-class Hitbox
-class Animacion
-class Poder
+class Nivel {
+- nombre
++Elegir()
+}
 
-class Victoria
-class Derrota
+class Tiempo {
+- segundos
++Restar()
+}
 
-class Control
-class Asistencias{
+class Escenario {
+- nombre
++Cambiar()
+}
+
+class Item {
+- tipo
++Usar()
+}
+
+class Personaje {
+- Vida porcentaje[0..100]
++Atacar()
++Defender()
++UsarHyper()
+}
+
+class Spiderman {
+- tela
++Telaraña()
+}
+
+class Ryu {
+- energia
++Hadouken()
+}
+
+class Ken {
+- fuego
++Shoryuken()
+}
+
+class ChunLi {
+- velocidad
++Patada()
+}
+
+class Jugador {
+- nombre
++ElegirPersonaje()
+}
+
+class Equipo {
+- miembros
++Agregar()
++Quitar()
+}
+
+class Vida {
+- porcentaje
++Perder()
++Recuperar()
+}
+
+class Energia {
+- nivel
++Gastar()
++Recuperar()
+}
+
+class Puntos {
+- valor
++Sumar()
+}
+
+class BarraHyper {
+- carga
++Cargar()
++Usar()
+}
+
+class Estado {
+- nombre
++Poner()
++Quitar()
+}
+
+class Movimiento {
+- nombre
++Ejecutar()
+}
+
+class MovimientoEspecial {
+- nombre
++EjecutarEspecial()
+}
+
+class SuperMovimiento {
+- nombre
+- superPoder
++EjecutarSuper()
+}
+
+class Combo {
+- pasos
++HacerCombo()
+}
+
+class Golpe {
+- fuerza
++Impactar()
+}
+
+class Ataque {
+- potencia
++Dañar()
+}
+
+class Defensa {
+- nivel
++Bloquear()
+}
+
+class Salto {
+- altura
++Saltar()
+}
+
+class Proyectil {
+- velocidad
++Lanzar()
+}
+
+class Dano {
+- cantidad
++Calcular()
+}
+
+
+
+
+
+
+class Poder {
+- nombre
++Activar()
+}
+
+class Victoria {
+- ganador
++Celebrar()
+}
+
+class Derrota {
+- perdedor
++Mostrar()
+}
+
+
+
+class Asistencia {
+- movimientoPredefinido
+- usosRestantes[0..n]
 + MovimientoEspecial: Golpear()
 + MovimientoEspecial: Cubrir()
-
-
-
++ Invocar()
 }
-Personaje "1" o-- "1..*" Asistencias
+
+' -----------------
+' Herencias / relaciones
 Spiderman --|> Personaje
 Ryu --|> Personaje
 Ken --|> Personaje
@@ -57,18 +187,18 @@ ChunLi --|> Personaje
 
 Jugador --|> Personaje
 
-
 MovimientoEspecial --|> Movimiento
 SuperMovimiento --|> Movimiento
+Golpe --|> Ataque
+
+' Multiplicidades / asociaciones (estilo que mostraste en la foto)
+Personaje "1" o-- "1..*" Asistencia
 
 Juego "1" *-- "1..*" Ronda
 Juego "1" *-- "1" Tiempo
 Juego "1" *-- "*" Nivel
 Juego "1" *-- "*" Escenario
 Juego "1" *-- "1..2" Jugador
-Juego "1" *-- "1" Interfaz
-Juego "1" *-- "1" Sonido
-Juego "1" *-- "0..*" Musica
 
 Jugador "1" *-- "1" Equipo
 Equipo "1" *-- "2..3" Personaje
@@ -78,8 +208,8 @@ Escenario "1" *-- "*" Colision
 
 Personaje "1" *-- "1" Vida
 Personaje "1" *-- "1" Energia
-Personaje "1" *-- "0..1" Puntaje
-Personaje "1" *-- "0..1" BarraEspecial
+Personaje "1" *-- "0..1" Puntos
+Personaje "1" *-- "0..1" BarraHyper
 Personaje "1" *-- "*" Estado
 Personaje "1" *-- "0..*" Poder
 Personaje "1" *-- "0..*" Animacion
@@ -98,4 +228,4 @@ Movimiento "1" *-- "0..*" Golpe
 Movimiento "1" *-- "0..*" Colision
 
 Ronda "1" *-- "0..1" Victoria
-Ronda "1" *-- "0..1" Derrotac
+Ronda "1" *-- "0..1" Derrota
