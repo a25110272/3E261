@@ -1,5 +1,7 @@
+@startuml
+
 class Juego {
-- nombre
+- nombre 
 +Iniciar()
 +Terminar()
 }
@@ -178,8 +180,6 @@ class Asistencia {
 + Invocar()
 }
 
-' -----------------
-' Herencias / relaciones
 Spiderman --|> Personaje
 Ryu --|> Personaje
 Ken --|> Personaje
@@ -191,7 +191,7 @@ MovimientoEspecial --|> Movimiento
 SuperMovimiento --|> Movimiento
 Golpe --|> Ataque
 
-' Multiplicidades / asociaciones (estilo que mostraste en la foto)
+
 Personaje "1" o-- "1..*" Asistencia
 
 Juego "1" *-- "1..*" Ronda
@@ -216,7 +216,7 @@ Personaje "1" *-- "0..*" Animacion
 Personaje "1" *-- "1..*" Hitbox
 Personaje "1" *-- "0..*" Movimiento
 Personaje "1" *-- "0..*" Combo
-Personaje "1" *-- "0..*" Ataque
+Personaje "1" *-- "0..*" Asistencia
 Personaje "1" *-- "0..*" Defensa
 Personaje "1" *-- "0..*" Salto
 Personaje "1" *-- "0..*" Item
@@ -229,3 +229,4 @@ Movimiento "1" *-- "0..*" Colision
 
 Ronda "1" *-- "0..1" Victoria
 Ronda "1" *-- "0..1" Derrota
+@enduml
