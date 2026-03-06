@@ -1,17 +1,51 @@
-class Juego
+@startuml
+
+class Combate{
+ - Ronda rondas[1..*]
+ - Tiempo tiempo[1]
+ - Nivel niveles[*]
+ - Escenario escenarios[*]
+ - Jugador jugadores[1..2]
+}
+
 class Ronda
 class Nivel
 class Tiempo
-class Escenario
-class Interfaz
-class Sonido
-class Musica
 
-class Personaje
+class Escenario{
+}
+
+class Sonido
+
+class Personaje{
+ - Vida vida[1]
+ - Energia energia[1]
+ - Puntaje puntaje[0..1]
+ - BarraEspecial barraEspecial[0..1]
+ - Estado estados[*]
+ - Movimiento movimientos[0..*]
+ - MovimientoEspecial movimientosEspeciales[0..*]
+ - SuperMovimiento superMovimientos[0..*]
+ - Combo combos[0..*]
+ - Ataque ataques[1..*]
+ - Defensa defensas[0..*]
+ - Asistencia asistencias[0..*]
+ - Salto saltos[0..*]
+ - Teletransporte teletransportes[0..*]
+}
+
 class Spiderman
-class Jugador
-class CPU
-class Equipo
+class Ryu
+class Ken
+class ChunLi
+
+class Jugador{
+ - Equipo equipo[1]
+}
+
+class Equipo{
+ - Personaje personajes[2..3]
+}
 
 class Vida
 class Energia
@@ -19,26 +53,65 @@ class Puntaje
 class BarraEspecial
 class Estado
 
-class Movimiento
-class MovimientoEspecial
-class SuperMovimiento
-class Combo
-class Golpe
-class Ataque
-class Defensa
-class Salto
-class Proyectil
-class Daño
-class Colision
-class Hitbox
-class Animacion
-class Poder
+class Movimiento{
+ + Dano : Ejecutar(Personaje atacante, Personaje objetivo)
+}
 
-class Victoria
-class Derrota
+class MovimientoEspecial{
+ + BarraEspecial : Activar(Personaje usuario)
+ + Movimiento : CrearEfecto(Personaje usuario, Personaje objetivo)
+}
 
-class Control
-class Item
+class SuperMovimiento{
+ + BarraEspecial : ActivarSuper(Personaje usuario)
+ + Movimiento : ImpactoArea(Escenario escenario)
+}
+
+class Combo{
+ + Dano : Encadenar(Personaje atacante, Personaje objetivo, int golpes)
+}
+
+class Golpe{
+ + Dano : Calcular(Personaje atacante, Personaje objetivo)
+}
+
+class Ataque{
+ - Golpe golpes[1..*]
+ - Proyectil proyectil[0..1]
+ - Dano dano[1]
+
+ + Dano : Aplicar(Personaje atacante, Personaje objetivo)
+ + Golpe : EjecutarGolpe(Personaje atacante, Personaje objetivo)
+ + Proyectil : LanzarProyectil(Personaje atacante)
+}
+
+class Defensa{
+ + Estado : Bloquear(Personaje defensor, Ataque ataque)
+ + Estado : Esquivar(Personaje defensor, Ataque ataque)
+}
+
+class Proyectil{
+ + Movimiento : Desplazar(float vx, float vy)
+}
+
+class Asistencia{
+ + MovimientoEspecial : Golpear(Personaje asistente, Personaje objetivo)
+ + MovimientoEspecial : Cubrir(Personaje asistente, Personaje aliado)
+}
+
+class Salto{
+ + Movimiento : IniciarSalto(Personaje personaje)
+ + Movimiento : Caer(Personaje personaje)
+}
+
+class Teletransporte{
+ + Movimiento : Transportar(Personaje personaje, Escenario destino)
+ + Estado : Desaparecer(Personaje personaje)
+}
+
+class Dano{
+ + Vida : Aplicar(Personaje objetivo, int cantidad)
+}
 
 
 Spiderman --|> Personaje
@@ -46,52 +119,47 @@ Ryu --|> Personaje
 Ken --|> Personaje
 ChunLi --|> Personaje
 
-
-
-Jugador --|> Personaje
-CPU --|> Personaje
-
 MovimientoEspecial --|> Movimiento
 SuperMovimiento --|> Movimiento
 
 
-Juego *-- Ronda
-Juego *-- Tiempo
-Juego *-- Nivel
-Juego *-- Escenario
-Juego *-- Jugador
-Juego *-- Equipo
-Juego *-- Interfaz
-Juego *-- Sonido
-Juego *-- Musica
 
-Jugador *-- Control
-Equipo *-- Personaje
+Combate "1" *-- "1..*" Ronda
+Combate "1" *-- "1" Tiempo
+Combate "1" *-- "*" Nivel
+Combate "1" *-- "*" Escenario
+Combate "1" *-- "1..2" Jugador
 
-Escenario *-- Item
-Escenario *-- Colision
+Jugador "1" *-- "1" Equipo
+Equipo "1" *-- "2..3" Personaje
 
-Personaje *-- Vida
-Personaje *-- Energia
-Personaje *-- Puntaje
-Personaje *-- BarraEspecial
-Personaje *-- Estado
-Personaje *-- Poder
-Personaje *-- Animacion
-Personaje *-- Hitbox
-Personaje *-- Movimiento
-Personaje *-- Combo
-Personaje *-- Ataque
-Personaje *-- Defensa
-Personaje *-- Salto
-Personaje *-- Item
+Personaje "1" *-- "1" Vida
+Personaje "1" *-- "1" Energia
+Personaje "1" *-- "0..1" Puntaje
+Personaje "1" *-- "0..1" BarraEspecial
+Personaje "1" *-- "*" Estado
 
-Ataque *-- Daño
-Ataque *-- Proyectil
+Personaje "1" *-- "0..*" Movimiento
+Personaje "1" *-- "0..*" MovimientoEspecial
+Personaje "1" *-- "0..*" SuperMovimiento
+Personaje "1" *-- "0..*" Combo
+Personaje "1" *-- "1..*" Ataque
+Personaje "1" *-- "0..*" Defensa
+Personaje "1" *-- "0..*" Asistencia
+Personaje "1" *-- "0..*" Salto
+Personaje "1" *-- "0..*" Teletransporte
 
-Movimiento *-- Golpe
-Movimiento *-- Colision
+Ataque "1" *-- "1..*" Golpe
+Ataque "1" *-- "0..1" Proyectil
+Ataque "1" *-- "1" Dano
 
-Ronda *-- Victoria
-Ronda *-- Derrota
+Personaje o-- Asistencia
+Personaje o-- MovimientoEspecial
+Personaje o-- SuperMovimiento
+Personaje o-- Combo
+Personaje o-- Ataque
+Personaje o-- Defensa
+Personaje o-- Salto
+Personaje o-- Teletransporte
 
+@enduml
