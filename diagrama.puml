@@ -1,4 +1,8 @@
 @startuml
+/'
+Marvel vs Campom
+'/
+
 class Combate{
  - Ronda rondas[1..*]
  - Tiempo tiempo[1]
